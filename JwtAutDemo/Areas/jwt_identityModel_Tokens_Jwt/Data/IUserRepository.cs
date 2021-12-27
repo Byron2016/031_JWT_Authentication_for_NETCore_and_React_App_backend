@@ -9,5 +9,6 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Data
     public interface IUserRepository
     {
         User Create(User user);
+        User GetByEmail(string email);
     }
 }

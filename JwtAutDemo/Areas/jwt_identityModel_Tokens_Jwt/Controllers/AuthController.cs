@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
 {
     [Route("api")]
@@ -30,6 +31,24 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
             };
             
             return Created("success", _user.Create(user));
+        }
+
+        [HttpPost("login")]
+        public IActionResult Login(LoginDto dto)
+        {
+            var user = _user.GetByEmail(dto.Email);
+            if (user == null) return BadRequest(new { message = "Invalid credentials" });
+
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+            salt = "$2a$12$ncjskFMRG08WaoGrZkXhGe";
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password, salt);
+
+            if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+            {
+                return BadRequest(new { message = $"Invalid credentials en base {user.Password} enviado {hashedPassword}" });
+            }
+
+            return Ok(user);
         }
     }
 }

@@ -20,5 +20,10 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Data
             user.Id = _context.SaveChanges();
             return user;
         }
+
+        public User GetByEmail(string email)
+        {
+            return _context.Users.FirstOrDefault(u => u.Email == email);
+        }
     }
 }
