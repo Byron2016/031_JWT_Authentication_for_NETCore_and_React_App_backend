@@ -15,5 +15,13 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Data
         }
 
         public DbSet<User> Users { set; get; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasIndex(e => e.Email).IsUnique();
+            });
+        }
     }
 }

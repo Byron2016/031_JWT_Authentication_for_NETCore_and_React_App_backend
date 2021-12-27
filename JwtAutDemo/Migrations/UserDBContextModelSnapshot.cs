@@ -23,7 +23,7 @@ namespace JwtAutDemo.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(767)");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -32,6 +32,9 @@ namespace JwtAutDemo.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

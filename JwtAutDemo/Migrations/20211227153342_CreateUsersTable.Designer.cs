@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JwtAutDemo.Migrations
 {
     [DbContext(typeof(UserDBContext))]
-    [Migration("20211227152038_CreateUsersTable")]
+    [Migration("20211227153342_CreateUsersTable")]
     partial class CreateUsersTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace JwtAutDemo.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(767)");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -34,6 +34,9 @@ namespace JwtAutDemo.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
