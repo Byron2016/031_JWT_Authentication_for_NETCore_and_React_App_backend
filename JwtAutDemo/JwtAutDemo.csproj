@@ -15,8 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\jwt_identityModel_Tokens_Jwt\Data\" />
-    <Folder Include="Areas\jwt_identityModel_Tokens_Jwt\Models\" />
     <Folder Include="Areas\jwt_identityModel_Tokens_Jwt\Views\" />
   </ItemGroup>
 
