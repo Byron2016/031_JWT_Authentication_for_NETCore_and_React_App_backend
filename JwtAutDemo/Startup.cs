@@ -36,6 +36,8 @@ namespace JwtAutDemo
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
 
             app.UseAuthorization();
