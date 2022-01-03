@@ -27,6 +27,7 @@ namespace JwtAutDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddDbContext<UserDBContext>(opt => opt.UseMySQL(Configuration.GetConnectionString("Default")));
 
             services.AddControllers();
@@ -46,6 +47,18 @@ namespace JwtAutDemo
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(options => options
+                .WithOrigins(new[]
+                {
+                    "http://localhost:3000",
+                    "http://localhost:8080",
+                    "http://localhost:4200"
+                })
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials() //44.14 este nos permite enviar cookies al front-end.
+             ); 
 
             app.UseAuthorization();
 
