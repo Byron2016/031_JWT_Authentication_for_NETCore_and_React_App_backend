@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Helpers;
 
 namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
 {
@@ -16,13 +16,23 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
     {
         private readonly IUserRepository _user;
 
-        public AuthController(IUserRepository user)
+        private readonly JwtService _jwtService;
+
+        public AuthController(IUserRepository user, JwtService jwtService)
         {
             _user = user;
+            _jwtService = jwtService;
         }
         [HttpPost("register")]
         public IActionResult Register(RegisterDto dto)
         {
+            //http://localhost:8000/api/register
+            ////Body raw json
+            //{
+            //    "name": "a",
+            //    "email": "a.yahoo.com",
+            //    "password": "a"
+            //}
             var user = new User
             {
                 Name = dto.Name,
@@ -36,6 +46,12 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginDto dto)
         {
+            //http://localhost:8000/api/login
+            ////Body raw json
+            //{
+            //    "email": "a.yahoo.com",
+            //    "password": "a"
+            //}
             var user = _user.GetByEmail(dto.Email);
             if (user == null) return BadRequest(new { message = "Invalid credentials" });
 
@@ -48,7 +64,14 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
                 return BadRequest(new { message = $"Invalid credentials en base {user.Password} enviado {hashedPassword}" });
             }
 
-            return Ok(user);
+            var jwt = _jwtService.Generate(user.Id);
+
+            
+
+            return Ok(new 
+            { 
+                jwt
+            });
         }
     }
 }

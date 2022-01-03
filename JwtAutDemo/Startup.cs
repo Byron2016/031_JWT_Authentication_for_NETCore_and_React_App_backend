@@ -1,4 +1,5 @@
 using JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Data;
+using JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,8 @@ namespace JwtAutDemo
             services.AddControllers();
 
             services.AddScoped<IUserRepository, UserRepository>();
-        }
+            services.AddScoped<JwtService>();
+        } //Recomienda tener la interfase pero por mantenrlo simple no lo hizo. Min. 40.00
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
