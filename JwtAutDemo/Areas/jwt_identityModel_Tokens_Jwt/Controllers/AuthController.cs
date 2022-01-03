@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
 {
@@ -66,11 +67,14 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
 
             var jwt = _jwtService.Generate(user.Id);
 
-            
+            Response.Cookies.Append("jwt", jwt, new CookieOptions 
+            { 
+                HttpOnly = true // front end cannot access it. the only propose is get it in the back end and backend can modify or access it. 
+            });
 
             return Ok(new 
             { 
-                jwt
+                message = "success"
             });
         }
     }
