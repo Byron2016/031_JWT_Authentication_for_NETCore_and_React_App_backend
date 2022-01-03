@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace JwtAutDemo.Areas.Dtos
+﻿namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Dtos
 {
     public class RegisterDto
     {

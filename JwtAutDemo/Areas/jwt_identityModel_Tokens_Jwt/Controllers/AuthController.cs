@@ -1,4 +1,4 @@
-﻿using JwtAutDemo.Areas.Dtos;
+﻿using JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Dtos;
 using JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Data;
 using JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Models;
 using Microsoft.AspNetCore.Mvc;
