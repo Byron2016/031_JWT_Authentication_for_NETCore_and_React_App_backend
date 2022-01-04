@@ -77,5 +77,32 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
                 message = "success"
             });
         }
+
+        [HttpGet("user")]
+        public IActionResult User()
+        {
+            //50.00
+            //http://localhost:8000/api/user
+            ////Body raw jso
+
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+
+                var token = _jwtService.Verify(jwt);
+
+                var userId = int.Parse(token.Issuer);
+
+                var user = _user.GetById(userId);
+
+                return Ok(user);
+            } catch(Exception _)
+            {
+                return Unauthorized();
+            }
+            
+
+
+        }
     }
 }
