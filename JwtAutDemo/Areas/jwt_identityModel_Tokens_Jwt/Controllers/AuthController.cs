@@ -100,9 +100,21 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Controllers
             {
                 return Unauthorized();
             }
-            
+        }
 
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            //54.48
+            //http://localhost:8000/api/logout
+            ////Body raw jso
 
+            Response.Cookies.Delete("jwt");
+
+            return Ok(new
+            {
+                message = "success"
+            });
         }
     }
 }
