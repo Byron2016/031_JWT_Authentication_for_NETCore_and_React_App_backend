@@ -10,5 +10,6 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Data
     {
         User Create(User user);
         User GetByEmail(string email);
+        User GetById(int id); //51.21
     }
 }

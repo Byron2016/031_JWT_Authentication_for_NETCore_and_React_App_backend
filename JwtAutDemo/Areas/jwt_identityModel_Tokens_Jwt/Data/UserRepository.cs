@@ -25,5 +25,11 @@ namespace JwtAutDemo.Areas.jwt_identityModel_Tokens_Jwt.Data
         {
             return _context.Users.FirstOrDefault(u => u.Email == email);
         }
+
+        public User GetById(int id)
+        {
+            //51.21
+            return _context.Users.FirstOrDefault(u => u.Id == id);
+        }
     }
 }
